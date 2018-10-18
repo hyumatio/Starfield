@@ -1,26 +1,107 @@
-//your code here
+
+particle[] comet;
 void setup()
 {
-	//your code here
+  size(500,500);
+  comet = new particle[500];
+  
+  for(int i = 0; i < comet.length; i++)
+  {
+    comet[i] = new normalParticle();
+    comet[0]= new jumboParticle();
+    comet[1] = new oddballParticle();
+    
+  }
 }
+
 void draw()
 {
-	//your code here
+  background(200);
+   for(int i = 0; i < comet.length; i++)
+  {
+    comet[i].show();
+    comet[i].move();
+   
+   
+    
+    
+    
+  }
+
 }
-class NormalParticle
+
+interface particle
 {
-	//your code here
+ public void show();
+ public void move(); 
 }
-interface Particle
+class normalParticle implements particle
 {
-	//your code here
+  public double myX,myY,mySpeed,myAngle,mySize;
+  normalParticle(){
+    myX=250;
+    myY=250;
+    mySpeed = (Math.random()*5);
+    myAngle = (Math.random()*(2*Math.PI));
+    mySize = 10;
+  }
+ public void show()
+  {
+    fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
+    ellipse((float)myX,(float)myY,(float)mySize,(float)mySize);
+    
+  }
+  
+public void move()
+  {
+    myX = myX +(Math.cos(myAngle)*(mySpeed));
+    myY = myY +(Math.sin(myAngle)*(mySpeed));
+  }
+  
+  
 }
-class OddballParticle //uses an interface
+
+class jumboParticle extends normalParticle
 {
-	//your code here
-}
-class JumboParticle //uses inheritance
+ public void show()
+  {
+    fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
+    ellipse((float)myX,(float)myY,100,100);
+    
+  }
+  
+public void move()
+  {
+    myX = myX +(Math.cos(myAngle)*(mySpeed));
+    myY = myY +(Math.sin(myAngle)*(mySpeed));
+  }
+ }
+
+
+
+class oddballParticle implements particle
 {
-	//your code here
+  int x,y;
+  oddballParticle()
+  {
+    x=250;
+    y=250;
+  }
+ public void show()
+ {
+   fill(0);
+   ellipse(x,y,50,50);
+
+   
+ }
+ 
+ public void move()
+ {
+   x = x + (int)(Math.random()*9)-4;
+   y = y + (int)(Math.random()*9)-4;
+ }
+  
+
 }
+         
 
